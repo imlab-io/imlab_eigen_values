@@ -10,45 +10,104 @@ references: ""
 thumbnail: /assets/post_resources/eigen_values/thumbnail.png
 ---
 
-Önceki başlıklarda doğrusal cebirin önemli kavramları olan determinant ve matris tersi bulma konularına değinmiştik. Burada determinant işleminin matrisle ilişkilendirilmiş bir sabit olduğunu ve <img src="assets/post_resources/math//7afe6068b04bc231516c722c67aa7dc8.svg?invert_in_darkmode" align=middle width=36.52961069999999pt height=21.18721440000001pt/> bir matris için bu sabitin matrisi oluşturan vektörler arasında kalan alanı, <img src="assets/post_resources/math//46e42d6ebfb1f8b50fe3a47153d01cd2.svg?invert_in_darkmode" align=middle width=36.52961069999999pt height=21.18721440000001pt/> bir matris içinse matrisi oluşturan vektörler arasında kalan hacmi ifade ettiğini söylemiştik. Matris çarpması işlemi için de vektörleri ne şekilde ölçeklendirdiği ve döndürdüğünden bahsetmiştik. Bu yazımızda ise doğrusal cebrin bir başka önemli tanımlamalarından biri olan özdeğer (eigenvalue) ve özvektör (eigenvector) kavramları üzerinde duracağız.
+Önceki başlıklarda doğrusal cebirin önemli kavramları olan determinant ve matris tersi bulma konularına değinmiştik. Burada determinant işleminin matrisle ilişkilendirilmiş bir sabit olduğunu ve $2\times 2$ bir matris için bu sabitin matrisi oluşturan vektörler arasında kalan alanı, $3\times 3$ bir matris içinse matrisi oluşturan vektörler arasında kalan hacmi ifade ettiğini söylemiştik. Matris çarpması işlemi için de vektörleri ne şekilde ölçeklendirdiği ve döndürdüğünden bahsetmiştik. Bu yazımızda ise doğrusal cebrin bir başka önemli tanımlamalarından biri olan özdeğer (eigenvalue) ve özvektör (eigenvector) kavramları üzerinde duracağız.
 
 <!--more-->
 
-Yazımızın konusu olan özdeğer ve özvektörler de, determinant gibi matrisle ilişkilendirilmiş özel değerlerdir. Bu kavramları anlamak için matris çarpması işlemine geri dönelim. <img src="assets/post_resources/math//2c5d47a2870fff9fd75016d06c16994f.svg?invert_in_darkmode" align=middle width=53.55962039999999pt height=23.488575000000026pt/> gibi bir çarpma işlemi sonucunda; hemen herzaman <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> vektöründe ölçek, açı ve kayma değişimi meydana gelir. Bu değişim <img src="assets/post_resources/math//b0b48113967d0a5843b2aaa2d71ec9e2.svg?invert_in_darkmode" align=middle width=10.74774195pt height=23.488575000000026pt/> vektöründe tutulduğundan rastgele bir <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisi seçip basit bir <img src="assets/post_resources/math//1b1a6e6fefdf7c1669914c638a5d6578.svg?invert_in_darkmode" align=middle width=86.728224pt height=27.6567522pt/> için vektörün nasıl değiştiğini inceleyelim.
+Yazımızın konusu olan özdeğer ve özvektörler de, determinant gibi matrisle ilişkilendirilmiş özel değerlerdir. Bu kavramları anlamak için matris çarpması işlemine geri dönelim. $\vec{y}=A\vec{x}$ gibi bir çarpma işlemi sonucunda; hemen herzaman $\vec{x}$ vektöründe ölçek, açı ve kayma değişimi meydana gelir. Bu değişim $\vec{y}$ vektöründe tutulduğundan rastgele bir $A$ matrisi seçip basit bir $\vec{x}=[1, -1]^T$ için vektörün nasıl değiştiğini inceleyelim.
 
-<p align="center"><img src="assets/post_resources/math//7c993cd5f60f852c2715fe8623f248c5.svg?invert_in_darkmode" align=middle width=315.89043749999996pt height=39.452455349999994pt/></p>
+$$
+y=v
+\left [
+\begin{array}{cc}
+a_{11} & a_{12}\\
+a_{21} & a_{22}\\
+\end{array}
+\right ]
+\left [
+\begin{array}{r}
+1\\
+-1\\
+\end{array}
+\right ]=
+\left [
+\begin{array}{c}
+a_{11}-a_{12}\\
+a_{21}-a_{22}\\
+\end{array}
+\right ]
+$$
 
-Burada <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisine bağlı olarak <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> vektörü dönme ve ölçekleme işlemleri ile <img src="assets/post_resources/math//9edc4847dce0ad00f3e8525a6b5cf86a.svg?invert_in_darkmode" align=middle width=187.32186165pt height=27.6567522pt/> vektörüne dönüşmüştür. Peki öyle vektörler bulunabilir mi ki; çarpım sonucunda <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> vektörünün sadece ölçeği değişsin, yönü değişmesin.
+Burada $A$ matrisine bağlı olarak $\vec{x}$ vektörü dönme ve ölçekleme işlemleri ile $\vec{y}=[a_{11}-a_{12},a_{21}-a_{22}]^T$ vektörüne dönüşmüştür. Peki öyle vektörler bulunabilir mi ki; çarpım sonucunda $\vec{x}$ vektörünün sadece ölçeği değişsin, yönü değişmesin.
 
-En basit çözüm olarak <img src="assets/post_resources/math//79435304136ed8feced7c7f33f2b2ab8.svg?invert_in_darkmode" align=middle width=202.3357446pt height=22.831056599999986pt/> gibi bir sabit seçersek;
+En basit çözüm olarak $a_{11}-a_{12} \; = \; a_{22}-a_{21}\; = \; \lambda$ gibi bir sabit seçersek;
 
-<p align="center"><img src="assets/post_resources/math//f6ce2dc62b3d41bce69b07e00f43ba24.svg?invert_in_darkmode" align=middle width=303.81468644999995pt height=39.452455349999994pt/></p>
+$$
+\vec{y}=
+\left [
+\begin{array}{cc}
+a_{11} & a_{12}\\
+a_{21} & a_{22}\\
+\end{array}
+\right ]
+\left [
+\begin{array}{r}
+1\\
+-1\\
+\end{array}
+\right ]=
+\left [
+\begin{array}{r}
+\lambda\\
+-\lambda\\
+\end{array}
+\right ]
+= \lambda \vec{x}
+$$
 
-işlemi sonucunda <img src="assets/post_resources/math//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> vektörünün doğrultusu değişmemiş, yalnızca genliği (ölçeği) <img src="assets/post_resources/math//fd8be73b54f5436a5cd2e73ba9b6bfa9.svg?invert_in_darkmode" align=middle width=9.58908224999999pt height=22.831056599999986pt/> kadar değişmiş olacaktır. Böyle bir değişime neden olan tek değişim <img src="assets/post_resources/math//4cb3408e84b54a49acc099439e853686.svg?invert_in_darkmode" align=middle width=184.0713501pt height=22.831056599999986pt/> dır. Ancak <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin <img src="assets/post_resources/math//4cb3408e84b54a49acc099439e853686.svg?invert_in_darkmode" align=middle width=184.0713501pt height=22.831056599999986pt/> denklemini sağlayan sonsuz sayıda çözümü vardır. Örneğin <img src="assets/post_resources/math//a6c715717efe4ff60f98554c5b87e4cf.svg?invert_in_darkmode" align=middle width=52.511355599999995pt height=22.831056599999986pt/> için aşağıda verilen tüm <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisleri, <img src="assets/post_resources/math//946b3fb9d6cf0be4457706560b6c6383.svg?invert_in_darkmode" align=middle width=22.856814749999987pt height=23.488575000000026pt/> çarpımında <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> e skalar olarak davranır ve <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> vektörünü <img src="assets/post_resources/math//fd8be73b54f5436a5cd2e73ba9b6bfa9.svg?invert_in_darkmode" align=middle width=9.58908224999999pt height=22.831056599999986pt/> kadar ölçekler. 
+işlemi sonucunda $x$ vektörünün doğrultusu değişmemiş, yalnızca genliği (ölçeği) $\lambda$ kadar değişmiş olacaktır. Böyle bir değişime neden olan tek değişim $a_{11}-a_{12} = a_{22}-a_{21} = \lambda$ dır. Ancak $A$ matrisinin $a_{11}-a_{12} = a_{22}-a_{21} = \lambda$ denklemini sağlayan sonsuz sayıda çözümü vardır. Örneğin $\lambda=-1$ için aşağıda verilen tüm $A$ matrisleri, $A\vec{x}$ çarpımında $\vec{x}$ e skalar olarak davranır ve $\vec{x}$ vektörünü $\lambda$ kadar ölçekler. 
 
-<p align="center"><img src="assets/post_resources/math//0dc66822b9949cef1ced989bf7c3d515.svg?invert_in_darkmode" align=middle width=285.38784449999997pt height=78.9048876pt/></p>
+$$A=\left[\begin{array}{rr}0&&1\\-2&&-3\end{array}\right], \left[\begin{array}{rr}0&&1\\3&&2\end{array}\right], \left[\begin{array}{rr}2&&3\\4&&3\end{array}\right], \dots$$
 
-Herhangi bir <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisi için, <img src="assets/post_resources/math//f0589dcef5c89a41ecafc5e5ea20b79f.svg?invert_in_darkmode" align=middle width=94.4612988pt height=23.488575000000026pt/> şartını sağlayan tüm <img src="assets/post_resources/math//fd8be73b54f5436a5cd2e73ba9b6bfa9.svg?invert_in_darkmode" align=middle width=9.58908224999999pt height=22.831056599999986pt/> değerlerine <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin özdeğeri, <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> vektörlerine ise <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin özvektörleri denir. Dikkat edilirse <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/>, <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin bir özvektörü olduğunda, <img src="assets/post_resources/math//946b3fb9d6cf0be4457706560b6c6383.svg?invert_in_darkmode" align=middle width=22.856814749999987pt height=23.488575000000026pt/> çarpımında <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisi, <img src="assets/post_resources/math//b727574cc4c4fa26ba79713ce6fb5484.svg?invert_in_darkmode" align=middle width=43.83551204999999pt height=22.831056599999986pt/> olan bir sabit gibi davranmaktadır.
+Herhangi bir $A$ matrisi için, $\vec{y}=A\vec{x}=\lambda \vec{x}$ şartını sağlayan tüm $\lambda$ değerlerine $A$ matrisinin özdeğeri, $\vec{x}$ vektörlerine ise $A$ matrisinin özvektörleri denir. Dikkat edilirse $\vec{x}$, $A$ matrisinin bir özvektörü olduğunda, $A\vec{x}$ çarpımında $A$ matrisi, $A=\lambda$ olan bir sabit gibi davranmaktadır.
 
-Peki herhangi bir <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisi için, bu şartı yerine getiren <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> vektörleri ve <img src="assets/post_resources/math//fd8be73b54f5436a5cd2e73ba9b6bfa9.svg?invert_in_darkmode" align=middle width=9.58908224999999pt height=22.831056599999986pt/> değerleri nasıl bulunur. Aslıdan çözüm oldukça basit. <img src="assets/post_resources/math//45e344f35ca462681c3b14c0f7ff2ca9.svg?invert_in_darkmode" align=middle width=63.758493149999985pt height=23.488575000000026pt/> eşitliğinde sağ tarafı sola atıp <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> parantezine alırsak: <p align="center"><img src="assets/post_resources/math//8b9928c7dcc0ffb6a056b91d8eccb772.svg?invert_in_darkmode" align=middle width=104.1065553pt height=19.369877999999996pt/></p> buluruz. <img src="assets/post_resources/math//a69ea95c5ab3121f37aba17dc7eaa1b7.svg?invert_in_darkmode" align=middle width=40.59725175pt height=30.520578000000025pt/> olması durumunda, eşitliğin sağlanması için <img src="assets/post_resources/math//82640824dbb050460378947a5d8685e9.svg?invert_in_darkmode" align=middle width=50.52506084999998pt height=22.831056599999986pt/> ifadesinin <img src="assets/post_resources/math//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747741949999991pt height=23.488575000000026pt/> vektörünü <img src="assets/post_resources/math//13f27335d7ba0845f7b200eef683c287.svg?invert_in_darkmode" align=middle width=10.747741949999993pt height=30.520578000000025pt/> noktasına götürmesi gereklidir. <img src="assets/post_resources/math//82640824dbb050460378947a5d8685e9.svg?invert_in_darkmode" align=middle width=50.52506084999998pt height=22.831056599999986pt/> ifadesinin tersi olduğunu varsayarak, yukarıda verilen eşitliğin her iki tarafını da <img src="assets/post_resources/math//b615ff68fa142d0776688b5f4f4cd2be.svg?invert_in_darkmode" align=middle width=80.13703994999999pt height=26.76175259999998pt/> ile çarparsak: <p align="center"><img src="assets/post_resources/math//2b9db11b0b56b7ff5639b33f92864764.svg?invert_in_darkmode" align=middle width=327.47384339999996pt height=19.369877999999996pt/></p> olduğunu görürüz. Yani <img src="assets/post_resources/math//3ac7ca7a6b0be026b0c3c3174ab3432d.svg?invert_in_darkmode" align=middle width=63.31047194999999pt height=24.65753399999998pt/> matrisinin tersi bulunabilir ise; denklemin tek çözümü <img src="assets/post_resources/math//ff304404dd394b1cb9bdca9f73748080.svg?invert_in_darkmode" align=middle width=41.01580889999999pt height=30.520578000000025pt/> dır. Aradığımız özvektörlerin <img src="assets/post_resources/math//13f27335d7ba0845f7b200eef683c287.svg?invert_in_darkmode" align=middle width=10.747741949999993pt height=30.520578000000025pt/> dan farklı olmasını istediğimizden <img src="assets/post_resources/math//3ac7ca7a6b0be026b0c3c3174ab3432d.svg?invert_in_darkmode" align=middle width=63.31047194999999pt height=24.65753399999998pt/> ifadesinin tersinin **bulunamaması** gerekmektedir. Bu da determinant yazımızdan hatırlayacağımız üzere; <p align="center"><img src="assets/post_resources/math//e14df5d93a78320ec59d9cb82e538aa9.svg?invert_in_darkmode" align=middle width=116.27840565pt height=16.438356pt/></p> olması durumunda mümkündür. Bu ifadeye <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin karakteristik denklemi denir. Karakteristik denklemin çözümü ile önce özdeğerler, bu özdeğerlerin <img src="assets/post_resources/math//c3ab1c74774fe96f3aebc49abc4ba168.svg?invert_in_darkmode" align=middle width=30.63921959999999pt height=24.65753399999998pt/> denkleminde yerine yazılması sonucunda çıkan ifade çözülerek de özvektörler bulunur. 
+Peki herhangi bir $A$ matrisi için, bu şartı yerine getiren $\vec{x}$ vektörleri ve $\lambda$ değerleri nasıl bulunur. Aslıdan çözüm oldukça basit. $A\vec{x}=\lambda \vec{x}$ eşitliğinde sağ tarafı sola atıp $\vec{x}$ parantezine alırsak: 
 
-**<span style="color: red;">NOT: </span>Burada; <img src="assets/post_resources/math//069ef773b859d4e53f746fde75ce30a4.svg?invert_in_darkmode" align=middle width=15.94753544999999pt height=23.488575000000026pt/>, <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin bir özvektörü ise <img src="assets/post_resources/math//ef908e4c732f0bfeaee3afc396501e07.svg?invert_in_darkmode" align=middle width=26.52403214999999pt height=23.488575000000026pt/> de <img src="assets/post_resources/math//c3ab1c74774fe96f3aebc49abc4ba168.svg?invert_in_darkmode" align=middle width=30.63921959999999pt height=24.65753399999998pt/> eşitliğini sağlayacağından, <img src="assets/post_resources/math//ef908e4c732f0bfeaee3afc396501e07.svg?invert_in_darkmode" align=middle width=26.52403214999999pt height=23.488575000000026pt/>'in de <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/>' nın bir öz vektörü olduğuna dikkat edilmelidir.**
+$$(A-\lambda I)\vec{x}=\vec{0} \tag{1}$$ 
 
-Örnek bir <p align="center"><img src="assets/post_resources/math//9cbefcdb342337800dd009e42c3ea46b.svg?invert_in_darkmode" align=middle width=91.64237114999999pt height=19.726228499999998pt/></p> matrisini ele alarak özdeğer ve özvektör bulma işlemini tekrar açıklayalım. <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin karakteristik denklemi: <p align="center"><img src="assets/post_resources/math//2d427391f1afc641763b169081840264.svg?invert_in_darkmode" align=middle width=218.71857315pt height=21.1872309pt/></p> şeklinde yazılır. Özdeğerleri bulmak için determinant ifadesi polinom şeklinde yazılarak elde edilen <img src="assets/post_resources/math//8f4527d948b2713f6ac92ae1a0f78952.svg?invert_in_darkmode" align=middle width=113.31026684999999pt height=26.76175259999998pt/> ikinci dereceden denklem çözülürse; özdeğerler <img src="assets/post_resources/math//c737e2514da9757259c9fc2f0e861ffb.svg?invert_in_darkmode" align=middle width=59.88581609999999pt height=22.831056599999986pt/>, <img src="assets/post_resources/math//b1af019241ff1b1e89b2e6991366b598.svg?invert_in_darkmode" align=middle width=59.88581609999999pt height=22.831056599999986pt/> olarak bulunur. Bu özdeğerlerden ilki (<img src="assets/post_resources/math//ce9b0d1765717c60b7915f2a48951a92.svg?invert_in_darkmode" align=middle width=16.141629899999987pt height=22.831056599999986pt/>)' nin <img src="assets/post_resources/math//c3ab1c74774fe96f3aebc49abc4ba168.svg?invert_in_darkmode" align=middle width=30.63921959999999pt height=24.65753399999998pt/> de yerine yazılması ile; 
+buluruz. $\vec{v}\neq\vec{0}$ olması durumunda, eşitliğin sağlanması için $A-\lambda I$ ifadesinin $\vec{x}$ vektörünü $\vec{0}$ noktasına götürmesi gereklidir. $A-\lambda I$ ifadesinin tersi olduğunu varsayarak, yukarıda verilen eşitliğin her iki tarafını da $(A-\lambda I)^{-1}$ ile çarparsak: $$(A-\lambda I)^{-1}(A-\lambda I)\vec{x}=(A-\lambda I)^{-1}\vec{0} \equiv \vec{x}=\vec{0}$$ olduğunu görürüz. Yani $(A-\lambda I)$ matrisinin tersi bulunabilir ise; denklemin tek çözümü $\vec{x}=\vec{0}$ dır. Aradığımız özvektörlerin $\vec{0}$ dan farklı olmasını istediğimizden $(A-\lambda I)$ ifadesinin tersinin **bulunamaması** gerekmektedir. Bu da determinant yazımızdan hatırlayacağımız üzere; $$\det(A-\lambda I)=0$$ olması durumunda mümkündür. Bu ifadeye $A$ matrisinin karakteristik denklemi denir. Karakteristik denklemin çözümü ile önce özdeğerler, bu özdeğerlerin $\eqref{1}$ denkleminde yerine yazılması sonucunda çıkan ifade çözülerek de özvektörler bulunur. 
 
-<p align="center"><img src="assets/post_resources/math//b43e55e74253847bd7c85afed2bbf870.svg?invert_in_darkmode" align=middle width=173.21620305pt height=78.9048876pt/></p>
+**<span style="color: red;">NOT: </span>Burada; $\vec{x_1}$, $A$ matrisinin bir özvektörü ise $\alpha \vec{x_1}$ de $\eqref{1}$ eşitliğini sağlayacağından, $\alpha \vec{x_1}$'in de $A$' nın bir öz vektörü olduğuna dikkat edilmelidir.**
 
-bulunur. İfadenin çözümü sonucunda da <p align="center"><img src="assets/post_resources/math//4bb37d33eded8a645edb2c671c888f40.svg?invert_in_darkmode" align=middle width=88.00777095pt height=19.726228499999998pt/></p> bulunur. <img src="assets/post_resources/math//22d952fd172ae91ac1817c8f2b3be088.svg?invert_in_darkmode" align=middle width=16.141629899999987pt height=22.831056599999986pt/> nin <img src="assets/post_resources/math//c3ab1c74774fe96f3aebc49abc4ba168.svg?invert_in_darkmode" align=middle width=30.63921959999999pt height=24.65753399999998pt/> de yerine yazılması ile de; 
+Örnek bir $$A=\left[ \begin{smallmatrix}0 & 1\\-2 & -3\end{smallmatrix} \right]$$ matrisini ele alarak özdeğer ve özvektör bulma işlemini tekrar açıklayalım. $A$ matrisinin karakteristik denklemi: $$\det(A-\lambda I) =\bigl \lvert \begin{smallmatrix}0-\lambda&&1\\-2&&-3-\lambda\end{smallmatrix} \bigl \lvert=0$$ şeklinde yazılır. Özdeğerleri bulmak için determinant ifadesi polinom şeklinde yazılarak elde edilen $\lambda^2+3\lambda+2 = 0$ ikinci dereceden denklem çözülürse; özdeğerler $\lambda_1=-1$, $\lambda_2=-2$ olarak bulunur. Bu özdeğerlerden ilki ($\lambda_1$)' nin $\eqref{1}$ de yerine yazılması ile; 
 
-<p align="center"><img src="assets/post_resources/math//e76ffa5588f3264d366e10841b11f21b.svg?invert_in_darkmode" align=middle width=173.21620305pt height=78.9048876pt/></p>
+$$
+\left[\begin{array}{rr}
+0- (-1)&&1\\
+-2&&-3 - (-1)
+\end{array}\right]
+\vec{x}
+= \vec{0}
+$$
 
-eşitliği elde edilir. Eşitliğin çözülmesi sonucunda da <p align="center"><img src="assets/post_resources/math//e76f7a3b24f306f6c348df0eff6c598b.svg?invert_in_darkmode" align=middle width=88.00777095pt height=19.726228499999998pt/></p> bulunur.
+bulunur. İfadenin çözümü sonucunda da $$\vec{x_1}=\alpha\left[ \begin{smallmatrix} 1\\-1 \end{smallmatrix} \right ]$$ bulunur. $\lambda_2$ nin $\eqref{1}$ de yerine yazılması ile de; 
+
+$$
+\left[\begin{array}{rr}
+0- (-2)&&1\\
+-2&&-3 - (-2)
+\end{array}\right]
+\vec{x}
+= \vec{0}
+$$
+
+eşitliği elde edilir. Eşitliğin çözülmesi sonucunda da $$\vec{x_2}=\alpha\left[\begin{smallmatrix}1\\-2\end{smallmatrix}\right]$$ bulunur.
 
 <hr align="center" color="yellow" size="2" width="100%" /><span style="color: yellow;">DİKKAT: </span>
 
-Matlab, Octave gibi matris işleme kütüphanelerinde özdeğer ve özvektörlerin hesaplanması için `eig` fonksiyonu bulunmaktadır. Çözümünü elimizle yaptığımız <p align="center"><img src="assets/post_resources/math//2e7dc646ab90275b4b25e4338eb9a4a3.svg?invert_in_darkmode" align=middle width=91.64237114999999pt height=19.726228499999998pt/></p> matrisinin özdeğer ve özvektörler bu programlar aracılığı ile bulunmak istenirse komut satırına 
+Matlab, Octave gibi matris işleme kütüphanelerinde özdeğer ve özvektörlerin hesaplanması için `eig` fonksiyonu bulunmaktadır. Çözümünü elimizle yaptığımız $$A=\left[\begin{smallmatrix}0&1\\-2&-3\end{smallmatrix}\right]$$ matrisinin özdeğer ve özvektörler bu programlar aracılığı ile bulunmak istenirse komut satırına 
 
-`[v,lambda]=eig([0 1;-2 -3])` komutu yazılmalıdır. Ancak bu işlem sonucunda programın <p align="center"><img src="assets/post_resources/math//5f6b55ca0cde2ab5590d3424504fac95.svg?invert_in_darkmode" align=middle width=109.93151565000001pt height=19.726228499999998pt/></p> ve <p align="center"><img src="assets/post_resources/math//e8dcc3dae85228f924697537d04d621e.svg?invert_in_darkmode" align=middle width=109.93151565000001pt height=20.03655885pt/></p> şeklinde hesaplandığını görürüz.
+`[v,lambda]=eig([0 1;-2 -3])` komutu yazılmalıdır. Ancak bu işlem sonucunda programın $$\vec{v_1}=\left[\begin{smallmatrix}0.70711\\-0.70711\end{smallmatrix}\right]$$ ve $$\vec{v_2}=\left[\begin{smallmatrix}-0.44721\\-0.89443\end{smallmatrix}\right]$$ şeklinde hesaplandığını görürüz.
 ```matlab
 v =
 
@@ -60,52 +119,74 @@ lambda =
   -1   0
    0  -2
 ```
-Bu sonuçlar <img src="assets/post_resources/math//340a691d04527e5293626c6f28c598b2.svg?invert_in_darkmode" align=middle width=71.26685444999998pt height=27.77565449999998pt/> ve <img src="assets/post_resources/math//91d4ff89b27b899d8c0e24dee587be47.svg?invert_in_darkmode" align=middle width=71.26685444999998pt height=27.77565449999998pt/> seçilmesi ile elde edilir ve böylece öz vektörlerin normlarının <img src="assets/post_resources/math//b32aba4b068097f64917645174ba947f.svg?invert_in_darkmode" align=middle width=119.26931444999998pt height=24.65753399999998pt/> olması sağlanır.
+Bu sonuçlar $\alpha_1=\frac{1}{||x_1||}$ ve $\alpha_2=\frac{1}{||x_2||}$ seçilmesi ile elde edilir ve böylece öz vektörlerin normlarının $||v_1||=||v_2||=1$ olması sağlanır.
 
 <hr align="center" color="yellow" size="2" width="100%" />
 
 Literatürde özdeğer ve özvektör hesaplamak için pek çok yöntem (power iteration, bisection method, QR algorithm, Jacobi eigenvalue algorithm, vs.) önerilmiştir. Ancak nümerik yöntemler ile özdeğer ve özvektör hesaplama işlemi sanıldığından daha karmaşık bir problemdir ve önerilen bu yöntemlerden çoğu bazı özel matris yapıları (gerçek simetrik matris, hermitian matris, tridiagonal matris, vb.) için kullanılabilirdir. IMLAB görüntü işleme kütüphanesinde bulunan `eig` fonksiyonu **Jacobi Özdeğer Algoritması** ile özdeğer ve özvektörleri bulmaktadır.
 
 ### Jacobi Özdeğer Algoritması
-Jacobi özdeğer algoritması **Gerçek ve Simetrik Matrisler** üzerinde çalışan iteratif bir yöntemdir. Yöntem her bir iterasyonda uygun bir rotasyon matrisi <img src="assets/post_resources/math//5201385589993766eea584cd3aa6fa13.svg?invert_in_darkmode" align=middle width=12.92464304999999pt height=22.465723500000017pt/> ile <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin köşegendışı bir elemanı sıfırlamaya çalışır ve yeterli sayıda iterasyon sonrasında matrisi köşegen matrise dönüştürür. Rotasyon işlemi ile özdeğerler değişmediğinden iterasyonlar sonucu elde edilen köşegen matrisin her bir köşegen elemanı orjinal matrisin bir özdeğeridir. <img src="assets/post_resources/math//5201385589993766eea584cd3aa6fa13.svg?invert_in_darkmode" align=middle width=12.92464304999999pt height=22.465723500000017pt/> özel seçilmiş bir rotasyon matrisi olmak üzere Jacobi iterasyonu şu şekilde ifade edilir: <p align="center"><img src="assets/post_resources/math//59fc6d43c6dc508ef3d4ffafaef32f2d.svg?invert_in_darkmode" align=middle width=119.6621316pt height=14.75534445pt/></p>
+Jacobi özdeğer algoritması **Gerçek ve Simetrik Matrisler** üzerinde çalışan iteratif bir yöntemdir. Yöntem her bir iterasyonda uygun bir rotasyon matrisi $G$ ile $A$ matrisinin köşegendışı bir elemanı sıfırlamaya çalışır ve yeterli sayıda iterasyon sonrasında matrisi köşegen matrise dönüştürür. Rotasyon işlemi ile özdeğerler değişmediğinden iterasyonlar sonucu elde edilen köşegen matrisin her bir köşegen elemanı orjinal matrisin bir özdeğeridir. $G$ özel seçilmiş bir rotasyon matrisi olmak üzere Jacobi iterasyonu şu şekilde ifade edilir: $$A^{t+1} =  G^{t}A^{t}{G^{t}}^{\intercal}$$
 
-Burada <img src="assets/post_resources/math//5201385589993766eea584cd3aa6fa13.svg?invert_in_darkmode" align=middle width=12.92464304999999pt height=22.465723500000017pt/> <button onclick="clickToRevealGivensRotation()">Given rotasyon matrisi</button> olarak bilinmektedir ve uygulandığı herhangi bir matrisi veya vektörü <img src="assets/post_resources/math//aa20264597f5a63b51587e0581c48f2c.svg?invert_in_darkmode" align=middle width=33.46496009999999pt height=24.65753399999998pt/> düzleminde <img src="assets/post_resources/math//27e556cf3caa0673ac49a8f0de3c73ca.svg?invert_in_darkmode" align=middle width=8.17352744999999pt height=22.831056599999986pt/> kadar döndürmek için kullanılmaktadır.
+Burada $G$ <button onclick="clickToRevealGivensRotation()">Given rotasyon matrisi</button> olarak bilinmektedir ve uygulandığı herhangi bir matrisi veya vektörü $(i,j)$ düzleminde $\theta$ kadar döndürmek için kullanılmaktadır.
 
 <script>function clickToRevealGivensRotation() {   var x = document.getElementById("clickToRevealGivensRotation");   if (x.style.display === "none") {     x.style.display = "block";   } else {     x.style.display = "none";   } } </script>
 
 <div id="clickToRevealGivensRotation" style="display: none;">
-<p align="center"><img src="assets/post_resources/math//068e6d455614ebd82dbb0559366e60d4.svg?invert_in_darkmode" align=middle width=449.91772155pt height=187.39914105pt/></p>
+$$
+G(i,j,\theta) = 
+\left[
+\begin{array}{cccccccc}
+&& \color{red}i && \color{red}j  & &\\
+1 & \cdots & 0 & \cdots & 0 & \cdots & 0 & \\
+\vdots & \ddots & \vdots &  & \vdots & & \vdots & \\
+0 & \cdots & \cos(\theta) & \cdots & -\sin(\theta) & \cdots & 0 & \color{red}i\\
+\vdots &  & \vdots & \ddots & \vdots & & \vdots &\\
+0 & \cdots & \sin(\theta) & \cdots & \cos(\theta) & \cdots & 0 & \color{red}j \\
+\vdots &  & \vdots &  & \vdots & \ddots & \vdots &\\
+0 & \cdots & 0 & \cdots & 0 & \cdots & 1 &\\
+\end{array}\right]
+$$
 </div>
 
-Bu matris oldukça ayrık yapıda olduğundan Jacobi iterasyonu sonucunda <img src="assets/post_resources/math//3f0201f356e40dd0d6edbdba1b3cec53.svg?invert_in_darkmode" align=middle width=17.29459049999999pt height=26.085962100000025pt/> matrisinin sadece <img src="assets/post_resources/math//4fe48dde86ac2d37419f0b35d57ac460.svg?invert_in_darkmode" align=middle width=20.679527549999985pt height=21.68300969999999pt/> satır ve sütunlarında değişiklik meydana gelir ve <img src="assets/post_resources/math//c71b243d9a52c3e31e4912d2b9ff7812.svg?invert_in_darkmode" align=middle width=76.09581044999999pt height=24.65753399999998pt/> ve <img src="assets/post_resources/math//f577baaa6cce1d53adc2925c461f36ab.svg?invert_in_darkmode" align=middle width=77.33060114999999pt height=24.65753399999998pt/> olmak üzere <img src="assets/post_resources/math//59d9cda27c7bd13aee200db54797f23c.svg?invert_in_darkmode" align=middle width=33.93851174999999pt height=26.76175259999998pt/> matrisi aşağıdaki şekle dönüşür. 
+Bu matris oldukça ayrık yapıda olduğundan Jacobi iterasyonu sonucunda $A^{t}$ matrisinin sadece $i,j$ satır ve sütunlarında değişiklik meydana gelir ve $s=\sin(\theta_t)$ ve $c=\cos(\theta_t)$ olmak üzere $A^{t+1}$ matrisi aşağıdaki şekle dönüşür. 
 
-<p align="center"><img src="assets/post_resources/math//6cf7b8494465852f22cc6ea8619bf88b.svg?invert_in_darkmode" align=middle width=419.69575725pt height=125.88787365pt/></p>
+$$
+\begin{array}{cclc} 
+A^{t+1}_{ii}&=&c^2A^{t}_{ii} -2scA^{t}_{ij} + s^2A^{t}_{jj}&\\
+A^{t+1}_{jj}&=&s^2A^{t}_{ii} +2scA^{t}_{ij} + c^2A^{t}_{jj}&\\
+A^{t+1}_{ij} = A^{t+1}_{ji}&=&(c^2-s^2)A^{t}_{ij} +sc(A^{t}_{ii} - A^{t}_{jj})&\\
+A^{t+1}_{ik} = A^{t+1}_{ki}&=&cA^{t}_{ik} -sA^{t}_{jk} & k \neq i,j\\
+A^{t+1}_{kj} = A^{t+1}_{jk}&=&sA^{t}_{ik} +cA^{t}_{jk} & k \neq i,j\\
+A^{t+1}_{kl} & = & A^{t+1}_{kl} & k,l \neq i,j
+\end{array}
+$$
 
 
-<p align="center"><img src="assets/post_resources/math//3d30c87b3e7805cc5cb29a0c3a6af00f.svg?invert_in_darkmode" align=middle width=177.88741409999997pt height=44.06540985pt/></p> seçilmesi durumunda <img src="assets/post_resources/math//212c6d1656793636fb177ea1eff97690.svg?invert_in_darkmode" align=middle width=64.89723734999998pt height=28.894955100000008pt/> olacağından, <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisinin köşegen dışı bir elemanı <img src="assets/post_resources/math//29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219209349999991pt height=21.18721440000001pt/> yapılmış olunur. Bu işlem tüm köşegen dışı elemanlar için tekrarlanarak <img src="assets/post_resources/math//53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> matrisi köşegenleştirilebilir.
+$$\theta_t = \tan^{-1}(\frac{2A^{t}_{ij}}{A^{t}_{jj}-A^{t}_{ii}})/2$$ seçilmesi durumunda $A^{t+1}_{ij} = 0$ olacağından, $A$ matrisinin köşegen dışı bir elemanı $0$ yapılmış olunur. Bu işlem tüm köşegen dışı elemanlar için tekrarlanarak $A$ matrisi köşegenleştirilebilir.
 
-**<span style="color: red;">NOT: </span> Her dönüşüm işlemi sonrasında <img src="assets/post_resources/math//9da210e4f5d8becc2e30d75e2da5ead6.svg?invert_in_darkmode" align=middle width=33.93851174999999pt height=28.894955100000008pt/> elemanı sıfır yapılırken, daha önceki iterasyonlarda sıfır yapılan bir elemanın değeri değişebilir. Ancak her sweep (<img src="assets/post_resources/math//c35f4de118a1aeb0d9786e1b4bc8e38f.svg?invert_in_darkmode" align=middle width=50.39287935pt height=33.20539859999999pt/> iterasyon) sonucu köşegendışı elemanların her zaman küçüldüğü kanıtlanmıştır.**
+**<span style="color: red;">NOT: </span> Her dönüşüm işlemi sonrasında $A^{t+1}_{ij}$ elemanı sıfır yapılırken, daha önceki iterasyonlarda sıfır yapılan bir elemanın değeri değişebilir. Ancak her sweep ($\frac{N(N-1)}{2}$ iterasyon) sonucu köşegendışı elemanların her zaman küçüldüğü kanıtlanmıştır.**
 
 ### Kovaryans - Özdeğer & Özvektör İlişkisi
 Özdeğer ve özvektör analizi, büyük verilerin görselleştirilmesinde ve boyut indirgeme işlemlerinde sıklıkla kullanılan yöntemlerdendir. Büyük bir veri setinin kovaryans matrisinin özdeğer ve özvektör analizi yapıldığında, özvektörler verinin en yüksek değişintiyi gösterdiği düzlemi, özdeğerler ise bu düzlemdeki değişinti miktarını göstermektedir. Bu işlem liteartürde **Temel Bileşen Analizi (Principal Component Analysis)** olarak bilinir. 
 
-Aşağıda solda verilen görselde <img src="assets/post_resources/math//3b082c5bacb6113782de16edfe428fda.svg?invert_in_darkmode" align=middle width=94.83637349999998pt height=27.94539330000001pt/>, <img src="assets/post_resources/math//572c50112991aeb945a9a7c572a0d609.svg?invert_in_darkmode" align=middle width=131.51262795pt height=47.6716218pt/> olmak üzere; <img src="assets/post_resources/math//b5701530716f58d3f26ef299444a3849.svg?invert_in_darkmode" align=middle width=99.17984834999999pt height=26.76175259999998pt/> dağılımından <img src="assets/post_resources/math//88db9c6bd8c9a0b1527a1cedb8501c55.svg?invert_in_darkmode" align=middle width=24.657628049999992pt height=21.18721440000001pt/> adet örnek alınmış ve gösterilmiştir. Verilen kovaryans matrisinin özdeğer ve özvektörlerini **Jacobi Özdeğer Algoritması** ile bulmaya çalışalım ve çıkan sonucu görsel üzerinde inceleyelim. 
+Aşağıda solda verilen görselde $\mu=\left[\begin{array}{cc}0 & 0 \end{array}\right]$, $\sigma^2=\left[\begin{array}{cc} 2 & 1.2\\ 1.2 & 1\end{array}\right]$ olmak üzere; $X \sim N(\mu,\sigma^2)$ dağılımından $200$ adet örnek alınmış ve gösterilmiştir. Verilen kovaryans matrisinin özdeğer ve özvektörlerini **Jacobi Özdeğer Algoritması** ile bulmaya çalışalım ve çıkan sonucu görsel üzerinde inceleyelim. 
 
-* **Adım 0:** <img src="assets/post_resources/math//65022b5873c92a6f993f0dbb7e912251.svg?invert_in_darkmode" align=middle width=132.27177315pt height=47.6716218pt/>, <img src="assets/post_resources/math//62784b812a18d10e18dd291633420d7e.svg?invert_in_darkmode" align=middle width=107.61415004999999pt height=47.6716218pt/> olarak iterasyona başlanır
+* **Adım 0:** $A^t=\left[\begin{array}{rr} 2 & 1.2\\ 1.2 & 1\end{array}\right]$, $V^t=\left[\begin{array}{rr} 1 & 0\\ 0 & 1\end{array}\right]$ olarak iterasyona başlanır
 
-* **Adım 1:** <img src="assets/post_resources/math//4de05e4325a92d45fb3151d61564be6a.svg?invert_in_darkmode" align=middle width=17.29459049999999pt height=26.085962100000025pt/> nin köşegendışı elemanını <img src="assets/post_resources/math//4083062ed4c5b18a032068651aea825c.svg?invert_in_darkmode" align=middle width=78.9953736pt height=24.65753399999998pt/> yapacak <img src="assets/post_resources/math//27e556cf3caa0673ac49a8f0de3c73ca.svg?invert_in_darkmode" align=middle width=8.17352744999999pt height=22.831056599999986pt/> açısı bulunur
-<p align="center"><img src="assets/post_resources/math//43902b37c81a427e92acb2512ae256bd.svg?invert_in_darkmode" align=middle width=338.48954535pt height=48.9281661pt/></p> 
+* **Adım 1:** $A^t$ nin köşegendışı elemanını $A(1,2)=0$ yapacak $\theta$ açısı bulunur
+$$\theta_t = \frac{\tan^{-1}(\frac{2A^{t}_{ij}}{A^{t}_{jj}-A^{t}_{ii}})}{2} = \frac{\tan^{-1}(2\frac{1.2}{1-2})}{2}=56.310^\circ$$ 
 
-* **Adım 2:** <img src="assets/post_resources/math//6afa744f0c0f346bcee48e599a5d89a5.svg?invert_in_darkmode" align=middle width=70.26484244999999pt height=24.65753399999998pt/> rotasyon matrisi hesaplanır
-<p align="center"><img src="assets/post_resources/math//4c37ee77da958fe342cbce7c4eda19f0.svg?invert_in_darkmode" align=middle width=211.40667075000002pt height=39.452455349999994pt/></p> 
+* **Adım 2:** $G(1,2,\theta_t)$ rotasyon matrisi hesaplanır
+$$G_t = \left[\begin{array}{rr}  0.55470 & -0.83205\\ 0.83205 & 0.55470\end{array}\right]$$ 
 
-* **Adım 3:** <img src="assets/post_resources/math//eca1d4093759d05007ab84b0b2f37c22.svg?invert_in_darkmode" align=middle width=119.6621316pt height=27.866853299999985pt/> çarpımı ile <img src="assets/post_resources/math//4ff1d0cbe5e395acf8ec2ec1d85a48d2.svg?invert_in_darkmode" align=middle width=33.93851174999999pt height=22.465723500000017pt/> köşegen matrisi elde edilir
-<p align="center"><img src="assets/post_resources/math//1acd625120f852a321fd7cd0b0d35c51.svg?invert_in_darkmode" align=middle width=618.3685381500001pt height=40.34288445pt/></p> 
-* **Adım 4:** <img src="assets/post_resources/math//d2be17d05f39d19ee8dea49995139974.svg?invert_in_darkmode" align=middle width=94.51141424999999pt height=26.76175259999998pt/> çarpımı ile özvektörler hesaplanır
+* **Adım 3:** $A^{t+1} = G^{t}A^{t}{G^{t}}^{\intercal}$ çarpımı ile $A_{t+1}$ köşegen matrisi elde edilir
+$$A^{t+1} =  {\left[\begin{array}{rr}  0.55470 & -0.83205\\ 0.83205 & 0.55470\end{array}\right]}\left[\begin{array}{rr} 2 & 1.2\\ 1.2 & 1\end{array}\right]{\left[\begin{array}{rr}  0.55470 & -0.83205\\ 0.83205 & 0.55470\end{array}\right]}^{\intercal}=\left[\begin{array}{rr} 0.2 & 0\\ 0 & 2.8\end{array}\right]$$ 
+* **Adım 4:** $V^{t+1} = V^{t}G^{t}$ çarpımı ile özvektörler hesaplanır
 
-<p align="center"><img src="assets/post_resources/math//35de9c62fc4876b96c8d08de111c656e.svg?invert_in_darkmode" align=middle width=498.73360844999996pt height=40.34288445pt/></p> 
-Görüldüğü üzere girdi matrisimizin boyutu <img src="assets/post_resources/math//5642f62a9faca8d26da9e24171f49747.svg?invert_in_darkmode" align=middle width=36.52961069999999pt height=21.18721440000001pt/> büyüklüğünde olduğu için özdeğer ve özvektör bulma işlemi <img src="assets/post_resources/math//9612eecfec9dadf1a81d296bd2473777.svg?invert_in_darkmode" align=middle width=8.219209349999991pt height=21.18721440000001pt/> adımda tamamlanmıştır. Algoritma sonucunda özdeğerler <img src="assets/post_resources/math//40ae9e33e9941802227f2f6596d50342.svg?invert_in_darkmode" align=middle width=59.88581609999999pt height=22.831056599999986pt/> ve <img src="assets/post_resources/math//03965bfd02302be90673aebc4373874e.svg?invert_in_darkmode" align=middle width=59.88581609999999pt height=22.831056599999986pt/> olarak bulunmuştur. 
-Bu özdeğerlere karşı gelen özvektörler ise <img src="assets/post_resources/math//1a6a40a94bbc15930760519b7918534a.svg?invert_in_darkmode" align=middle width=137.71704705pt height=47.6716218pt/> ve <img src="assets/post_resources/math//1a4975dbcd1e6a60c9c0afb6792f2441.svg?invert_in_darkmode" align=middle width=124.93161944999999pt height=47.6716218pt/> olarak bulunmuştur. 
+$$V^{t+1} = \left[\begin{array}{rr} 1 & 0\\ 0 & 1\end{array}\right]{\left[\begin{array}{rr}  0.55470 & -0.83205\\ 0.83205 & 0.55470\end{array}\right]}^{\intercal} =\left[\begin{array}{rr} 0.55470 & 0.83205\\ -0.83205 & 0.55470\end{array}\right]$$ 
+Görüldüğü üzere girdi matrisimizin boyutu $2\times2$ büyüklüğünde olduğu için özdeğer ve özvektör bulma işlemi $5$ adımda tamamlanmıştır. Algoritma sonucunda özdeğerler $\lambda_1=0.2$ ve $\lambda_2=2.8$ olarak bulunmuştur. 
+Bu özdeğerlere karşı gelen özvektörler ise $\vec{v_1}=\left[\begin{array}{r}0.55470 \\ -0.83205\end{array}\right]$ ve $\vec{v_2}=\left[\begin{array}{r}0.83205 \\ 0.55470\end{array}\right]$ olarak bulunmuştur. 
 
 <button onclick="clickToRevealAnalticalSolution()">Aynı problemin analitik yöntemler ile çözümü için tıklayın</button>
 <script>function clickToRevealAnalticalSolution() {   var x = document.getElementById("clickToRevealAnalticalSolution");   if (x.style.display === "none") {     x.style.display = "block";   } else {     x.style.display = "none";   } } </script>
@@ -113,11 +194,25 @@ Bu özdeğerlere karşı gelen özvektörler ise <img src="assets/post_resources
 <div id="clickToRevealAnalticalSolution" style="display: none;"><hr align="center" color="black" size="2" width="100%" />
 
 Verilen girdi matrisinin karakteristik denklemi:
-<p align="center"><img src="assets/post_resources/math//9669ec6386e8c0e93d12f5630daf7b95.svg?invert_in_darkmode" align=middle width=241.39222304999998pt height=39.452455349999994pt/></p>şeklinde yazılır. Özdeğerleri bulmak için determinant ifadesi polinom şeklinde yazılır ise <img src="assets/post_resources/math//4b0d44a58fdcb81818af72db33c4509e.svg?invert_in_darkmode" align=middle width=134.31491039999997pt height=26.76175259999998pt/> elde edilir. Bu denklemin kökleri <img src="assets/post_resources/math//40ae9e33e9941802227f2f6596d50342.svg?invert_in_darkmode" align=middle width=59.88581609999999pt height=22.831056599999986pt/> ve <img src="assets/post_resources/math//03965bfd02302be90673aebc4373874e.svg?invert_in_darkmode" align=middle width=59.88581609999999pt height=22.831056599999986pt/> dir. Bu özdeğerlerden ilki (<img src="assets/post_resources/math//ce9b0d1765717c60b7915f2a48951a92.svg?invert_in_darkmode" align=middle width=16.141629899999987pt height=22.831056599999986pt/>)' nin <img src="assets/post_resources/math//c3ab1c74774fe96f3aebc49abc4ba168.svg?invert_in_darkmode" align=middle width=30.63921959999999pt height=24.65753399999998pt/> de yerine yazılması ile; 
-<p align="center"><img src="assets/post_resources/math//b67ec75c90d3c05a747a0b6590ef3eec.svg?invert_in_darkmode" align=middle width=217.96502144999997pt height=39.452455349999994pt/></p>
-bulunur. İfadenin çözümü sonucunda da <img src="assets/post_resources/math//167f0c6b8be55ca5fe218338fdacdba1.svg?invert_in_darkmode" align=middle width=152.46012209999998pt height=47.6716218pt/> bulunur. <img src="assets/post_resources/math//22d952fd172ae91ac1817c8f2b3be088.svg?invert_in_darkmode" align=middle width=16.141629899999987pt height=22.831056599999986pt/> nin <img src="assets/post_resources/math//c3ab1c74774fe96f3aebc49abc4ba168.svg?invert_in_darkmode" align=middle width=30.63921959999999pt height=24.65753399999998pt/> de yerine yazılması ile de; 
-<p align="center"><img src="assets/post_resources/math//3409d1055bb391930bd9032ef4f96159.svg?invert_in_darkmode" align=middle width=217.96502144999997pt height=39.452455349999994pt/></p>
-eşitliği elde edilir. Eşitliğin çözülmesi sonucunda da <img src="assets/post_resources/math//9df8950723fbc96d35a36f778229309b.svg?invert_in_darkmode" align=middle width=139.6746945pt height=47.6716218pt/> bulunur.
+$$\det(A-\lambda I) =\begin{vmatrix}2-\lambda & 1.2\\1.2 & 1-\lambda\end{vmatrix}=0$$şeklinde yazılır. Özdeğerleri bulmak için determinant ifadesi polinom şeklinde yazılır ise $\lambda^2-3\lambda+0.56=0$ elde edilir. Bu denklemin kökleri $\lambda_1=0.2$ ve $\lambda_2=2.8$ dir. Bu özdeğerlerden ilki ($\lambda_1$)' nin $\eqref{1}$ de yerine yazılması ile; 
+$$
+\left[\begin{array}{rr}
+2- (0.2) & 1.2\\
+1.2 & 1 - (0.2)
+\end{array}\right]
+\vec{x}
+= \vec{0}
+$$
+bulunur. İfadenin çözümü sonucunda da $\vec{x_1}=\alpha\left[\begin{array}{r}0.55470 \\ -0.83205\end{array}\right]$ bulunur. $\lambda_2$ nin $\eqref{1}$ de yerine yazılması ile de; 
+$$
+\left[\begin{array}{rr}
+2- (2.8) & 1.2\\
+1.2 & 1 - (2.8)
+\end{array}\right]
+\vec{x}
+= \vec{0}
+$$
+eşitliği elde edilir. Eşitliğin çözülmesi sonucunda da $\vec{x_2}=\alpha\left[\begin{array}{r}0.83205 \\ 0.55470\end{array}\right]$ bulunur.
 
 <hr align="center" color="black" size="2" width="100%" /></div>
 
